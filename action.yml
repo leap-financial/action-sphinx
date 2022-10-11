@@ -1,0 +1,36 @@
+name: Sphinx Documentation
+description: GitHub Action to compile and publish sphinx documentation
+author: leap-financial
+
+inputs:
+  sphinx_builder:
+    description: Builder to be used for Sphinx.
+    required: false
+    default: html
+  sourcedir:
+    description: Directory which contains source files.
+    required: false
+    default: .
+  sphinx_build_args:
+    description: Optionsl arguments for Sphinx build.
+    required: false
+  confluence_server:
+    description: Full URL of Confluence Wiki.
+    required: false
+  confluence_user:
+    description: Email address of Confluence User.
+    required: false
+  confluence_pass:
+    description: API Token for Confluence API Access.
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    SPHINX_BUILDER: ${{ inputs.sphinx_builder }}
+    SOURCEDIR: ${{ inputs.sourcedir }}
+    SPHINX_BUILD_ARGS: ${{ inputs.sphinx_build_args }}
+    CONFLUENCE_SERVER: ${{ inputs.confluence_server }}
+    CONFLUENCE_USER: ${{ inputs.confluence_user }}
+    CONFLUENCE_PASS: ${{ inputs.confluence_pass }}
